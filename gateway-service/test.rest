@@ -1,0 +1,96 @@
+### Register User
+POST http://localhost:3000/users/register
+Content-Type: application/json
+
+{
+  "name": "John Doe",
+  "email": "john@example.com",
+  "password": "password123",
+  "role": "patient"
+}
+###
+POST http://localhost:3000/users/login
+Content-Type: application/json
+
+{
+  "email": "john@example.com",
+  "password": "password123"
+}
+
+
+### Test 1: Create a New Pregnancy Record
+POST http://localhost:3000/pregnancy/ HTTP/1.1
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwicm9sZSI6InBhdGllbnQiLCJpYXQiOjE3MzM1NjE3NjMsImV4cCI6MTczMzU2NTM2M30.3LXuIXEsjRZKQh5k_tWtXKZseCH9ObHvK6s_pebwWJQ
+
+{
+  "patientId": "123",
+  "monthOfPregnancy": "3",
+  "city": "CityName",
+  "hospitalName": "Hospital Name",
+  "doctorName": "Dr. Smith"
+}
+
+### Test 2: Get Pregnancy Record by ID
+GET http://localhost:3000/pregnancy/123 HTTP/1.1
+Authorization: Bearer <your-jwt-token>
+
+### Test 3: Update a Pregnancy Record
+PUT http://localhost:3000/pregnancy/123 HTTP/1.1
+Content-Type: application/json
+Authorization: Bearer <your-jwt-token>
+
+{
+  "monthOfPregnancy": "4",
+  "city": "New Cityjjjj",
+  "doctorName":"mmm",
+  "hospitalName":"lll"
+}
+
+### Test 4: Get Non-Existent Pregnancy Record
+DELETE  http://localhost:3000/pregnancy/123 HTTP/1.1
+Authorization: Bearer <your-jwt-token>
+
+###
+GET http://localhost:3000/pregnancy/all HTTP/1.1
+Authorization: Bearer <your-jwt-token>
+
+### Test: Create an appointment (POST)
+POST http://localhost:3000/appointments HTTP/1.1
+Content-Type: application/json
+Authorization: Bearer <your-jwt-token>
+
+{
+  "patientId": "123",
+  "doctorId": "456",
+  "appointmentDate": "2024-12-15T10:00:00",
+  "status": "scheduled"
+}
+
+###
+
+### Test: Get appointment details (GET)
+GET http://localhost:3000/appointments/2 HTTP/1.1
+Authorization: Bearer <your-jwt-token>
+
+###
+
+### Test: Update an appointment (PUT)
+PUT http://localhost:3000/appointments/2 HTTP/1.1
+Content-Type: application/json
+Authorization: Bearer <your-jwt-token>
+
+{
+  "patientId": "123",
+  "doctorId": "456",
+  "appointmentDate": "2024-12-20T10:00:00",
+  "status": "rescheduleggggd"
+}
+
+###
+
+### Test: Delete an appointment (DELETE)
+DELETE http://localhost:3000/appointments/2 HTTP/1.1
+Authorization: Bearer<your-jwt-token>
+
+###
