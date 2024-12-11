@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import { updateUser } from "../../services/authService"; // Assuming your updateUser is in authService
+import { getAllUsers, updateUser } from "../../services/authService"; // Assuming your updateUser is in authService
 import { useNavigate } from "react-router-dom";
 import useSweetAlert from "../../components/notifications";
 import { getAllPregnancies } from "../../services/patientService";
@@ -25,18 +25,22 @@ const Profile = () => {
         password: '',
       });
       fetchPregnancyInfo(user.id);
+      
     } else {
       console.error('No user found in local storage');
       showErrorAlert('No user data found.');
     }
   }, []);
-
+const [users,setUsers]=useState([])
   const fetchPregnancyInfo = async (patientId) => {
     try {
       const user = JSON.parse(localStorage.getItem('user'));
 
       const pregnancies = await getAllPregnancies();
       const filteredPregnancy = pregnancies.filter(p => p.doctorName === user.name);
+      const users = await getAllUsers();
+        const PatientList = users.users;
+        setUsers(PatientList);
       if (filteredPregnancy) {
         setDoctorPregnancies(filteredPregnancy);
       } else {
@@ -164,7 +168,7 @@ const Profile = () => {
           <strong className="text-md text-indigo-700">Hospital</strong>
           <p className="text-xs text-gray-600">{pregnancy.hospitalName}</p>
           <strong className="text-md text-indigo-700">Patient Name</strong>
-          <p className="text-xs text-gray-600">{pregnancy.patientName}</p>
+          <p className="text-xs text-gray-600">{users.find(p => p.id === pregnancy.patientId)?.name || ""}</p>
         </div>
       ))}
     </div>

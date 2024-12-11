@@ -1,1 +1,60 @@
 this is file is required
+
+-----docker-----
+docker run -d --name rabbit -p 5672:5672 -p 15672:15672 rabbitmq:management
+
+
+create database if not exists user_db;
+create database if not exists pregnancydb;
+create database if not exists appointmentdb;
+
+select * from user_db.users;
+-- Create Admin Users
+INSERT INTO user_db.users (name, email, password, role, createdAt, updatedAt) VALUES 
+('Admin 1', 'admin1@example.com', '$2b$10$7H9L0RwHDMvJjwzqErES5uR4Vdv8/Zjjf1lVipmWceu0P5EkVszCq', 'admin', NOW(), NOW()),
+('Admin 2', 'admin2@example.com', '$2b$10$7H9L0RwHDMvJjwzqErES5uR4Vdv8/Zjjf1lVipmWceu0P5EkVszCq', 'admin', NOW(), NOW()),
+('Admin 3', 'admin3@example.com', '$2b$10$7H9L0RwHDMvJjwzqErES5uR4Vdv8/Zjjf1lVipmWceu0P5EkVszCq', 'admin', NOW(), NOW()),
+('Admin 4', 'admin4@example.com', '$2b$10$7H9L0RwHDMvJjwzqErES5uR4Vdv8/Zjjf1lVipmWceu0P5EkVszCq', 'admin', NOW(), NOW());
+
+-- Create Patient Users
+INSERT INTO user_db.users (name, email, password, role, createdAt, updatedAt) VALUES 
+('Patient 1', 'Patient1@gmail.com', '$2b$10$7H9L0RwHDMvJjwzqErES5uR4Vdv8/Zjjf1lVipmWceu0P5EkVszCq', 'patient', NOW(), NOW()),
+('Patient 2', 'patient2@example.com', '$2b$10$7H9L0RwHDMvJjwzqErES5uR4Vdv8/Zjjf1lVipmWceu0P5EkVszCq', 'patient', NOW(), NOW()),
+('Patient 3', 'patient3@example.com', '$2b$10$7H9L0RwHDMvJjwzqErES5uR4Vdv8/Zjjf1lVipmWceu0P5EkVszCq', 'patient', NOW(), NOW()),
+('Patient 4', 'patient4@example.com', '$2b$10$7H9L0RwHDMvJjwzqErES5uR4Vdv8/Zjjf1lVipmWceu0P5EkVszCq', 'patient', NOW(), NOW());
+
+-- Create Doctor Users
+INSERT INTO user_db.users (name, email, password, role, createdAt, updatedAt) VALUES 
+('Doctor 1', 'doctor1@gmail.com', '$2b$10$7H9L0RwHDMvJjwzqErES5uR4Vdv8/Zjjf1lVipmWceu0P5EkVszCq', 'doctor', NOW(), NOW()),
+('Doctor 2', 'doctor2@example.com', '$2b$10$7H9L0RwHDMvJjwzqErES5uR4Vdv8/Zjjf1lVipmWceu0P5EkVszCq', 'doctor', NOW(), NOW()),
+('Doctor 3', 'doctor3@example.com', '$2b$10$7H9L0RwHDMvJjwzqErES5uR4Vdv8/Zjjf1lVipmWceu0P5EkVszCq', 'doctor', NOW(), NOW()),
+('Doctor 4', 'doctor4@example.com', '$2b$10$7H9L0RwHDMvJjwzqErES5uR4Vdv8/Zjjf1lVipmWceu0P5EkVszCq', 'doctor', NOW(), NOW());
+
+-- Insert 9 pregnancies
+INSERT INTO pregnancydb.pregnancies (patientId, monthOfPregnancy, city, hospitalName, doctorName, createdAt, updatedAt)
+VALUES
+  (6, 3, 'New York', 'City Hospital', 'Doctor 1',NOW(), NOW()),
+  (7, 5, 'Los Angeles', 'General Hospital', 'Doctor 1',NOW(), NOW()),
+  (8, 7, 'Chicago', 'Northwest Hospital', 'Doctor 1',NOW(), NOW()),
+  (9, 4, 'Phoenix', 'State Hospital', 'Doctor 1',NOW(), NOW()),
+  (6, 6, 'Philadelphia', 'Metropolitan Hospital', 'Doctor 1',NOW(), NOW()),
+  (4, 8, 'San Antonio', 'Regional Hospital', 'Doctor 1',NOW(), NOW()),
+  (5, 9, 'San Diego', 'County Hospital', 'Doctor 1',NOW(), NOW()),
+  (6, 1, 'Dallas', 'City Health Center', 'Doctor 1',NOW(), NOW());
+  
+  
+  -- Insert 10 appointments
+INSERT INTO appointmentdb.Appointments (patientId, doctorId, appointmentDate, status, doctorName, patientName, createdAt, updatedAt)
+VALUES
+  (6, 10, '2024-12-20 09:00:00', 'Pending', 'Doctor 1', 'Patient 1',NOW(), NOW()),
+  (6, 10, '2024-12-20 10:00:00', 'Confirmed', 'Doctor 1', 'Patient 1',NOW(), NOW()),
+  (6, 10, '2024-12-21 11:00:00', 'Pending', 'Doctor 1', 'Patient 1',NOW(), NOW()),
+  (6, 10, '2024-12-22 14:00:00', 'Completed', 'Doctor 1', 'Patient 1',NOW(), NOW()),
+  (6, 10, '2024-12-22 15:00:00', 'Canceled', 'Doctor 1', 'Patient 1',NOW(), NOW()),
+  (6, 10, '2024-12-23 16:00:00', 'Pending', 'Doctor 1', 'Patient 1',NOW(), NOW()),
+  (7, 11, '2024-12-24 17:00:00', 'Confirmed', 'Doctor 2', 'Patient 2',NOW(), NOW()),
+  (7, 11, '2024-12-25 18:00:00', 'Pending', 'Doctor 2', 'Patient 2',NOW(), NOW()),
+  (7, 11, '2024-12-26 19:00:00', 'Pending', 'Doctor 2', 'Patient 2',NOW(), NOW()),
+  (7, 11, '2024-12-27 20:00:00', 'Completed', 'Doctor 2', 'Patient 2',NOW(), NOW());
+
+
