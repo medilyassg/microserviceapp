@@ -10,8 +10,8 @@ app.use(cors());
 
 // API Routes
 app.use('/users', require('./routes/userRoutes'));
-app.use('/pregnancy', require('./routes/pregnancyRoutes'));
-app.use('/appointments', require('./routes/appointmentRoutes'));
+app.use('/pregnancy',authMiddleware, require('./routes/pregnancyRoutes'));
+app.use('/appointments',authMiddleware,require('./routes/appointmentRoutes'));
 app.use('/notifications', require('./routes/notificationRoutes'));
 
 // Error handling

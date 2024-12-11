@@ -4,7 +4,13 @@ module.exports = {
     "./src/**/*.{js,jsx,ts,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        'custom-gray': 'rgb(55,65,81)',
+        'garynav':'rgb(31,41,55)' // Add your custom color
+      },
+
+    },
   },
   plugins: [],
 };

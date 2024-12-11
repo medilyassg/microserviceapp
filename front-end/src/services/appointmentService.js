@@ -1,13 +1,32 @@
-// services/appointmentService.js
 import axios from 'axios';
 
+// Create an Axios instance
 const api = axios.create({
-    baseURL: "http://localhost:3000/appointments", // Replace with your API URL
-    headers: {
-      "Content-Type": "application/json",
-    },
-  });
-  
+  baseURL: "http://localhost:3000/appointments", // Replace with your API URL
+  headers: {
+    "Content-Type": "application/json",
+  },
+});
+
+// Add a request interceptor to include the token in the headers
+api.interceptors.request.use(
+  (config) => {
+    // Get the token from localStorage
+    const token = localStorage.getItem("token");
+
+    // If the token exists, add it to the Authorization header
+    if (token) {
+      config.headers.Authorization = `Bearer ${token}`;
+    }
+
+    return config;
+  },
+  (error) => {
+    // Handle request errors
+    return Promise.reject(error);
+  }
+);
+
 // Create a new appointment
 export const createAppointment = async (appointmentData) => {
   try {

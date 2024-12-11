@@ -69,40 +69,41 @@ const ManageAdmins = () => {
   };
 
   return (
-    <div className="p-6">
-      <div className="mb-4">
+    <div className="container mx-auto p-6" style={{ backgroundColor: '#F4F7FB' }}>
+      <div className="flex justify-between items-center m-4 mb-6">
+        <h2 className="text-2xl font-semibold text-gray-800">Manage Admins</h2>
         <button
           onClick={() => setIsAddModalOpen(true)}
-          className="flex items-center py-2 px-4 bg-indigo-600 text-white rounded-md"
+          className="flex items-center py-2 px-4 bg-indigo-600 text-white rounded-md shadow-md hover:bg-indigo-700 transition duration-300"
         >
           <FaUserPlus className="mr-2" />
-          Add New User
+          Add New Admin
         </button>
       </div>
 
-      {/* Users Table */}
-      <table className="min-w-full border-collapse">
-        <thead>
+      <div className="overflow-x-auto shadow-md rounded-lg bg-white">
+      <table className="min-w-full table-auto">
+      <thead>
           <tr>
-            <th className="py-2 px-4 border-b text-left">Name</th>
-            <th className="py-2 px-4 border-b text-left">Email</th>
-            <th className="py-2 px-4 border-b text-left">Role</th>
-            <th className="py-2 px-4 border-b text-left">Actions</th>
+            <th className="py-3 px-6 text-left text-gray-600">Name</th>
+            <th className="py-3 px-6 text-left text-gray-600">Email</th>
+            <th className="py-3 px-6 text-left text-gray-600">Role</th>
+            <th className="py-3 px-6 text-left text-gray-600">Actions</th>
           </tr>
         </thead>
         <tbody>
           {users.map((user) => (
-            <tr key={user.id}>
-              <td className="py-2 px-4 border-b">{user.name}</td>
-              <td className="py-2 px-4 border-b">{user.email}</td>
-              <td className="py-2 px-4 border-b">{user.role}</td>
-              <td className="py-2 px-4 border-b">
+            <tr key={user.id} className="border-t">
+              <td className="py-3 px-6 text-gray-800">{user.name}</td>
+              <td className="py-3 px-6 text-gray-800">{user.email}</td>
+              <td className="py-3 px-6 text-gray-800">{user.role}</td>
+              <td className="py-3 px-6 text-gray-800">
                 <button
                   onClick={() => {
                     setCurrentUser(user);
                     setIsEditModalOpen(true);
                   }}
-                  className="mr-2 text-yellow-500"
+                  className="mr-4 text-yellow-500 hover:text-yellow-600 transition duration-300"
                 >
                   <FaEdit />
                 </button>
@@ -111,7 +112,7 @@ const ManageAdmins = () => {
                     setCurrentUser(user);
                     setIsDeleteModalOpen(true);
                   }}
-                  className="text-red-500"
+                  className="text-red-500 hover:text-red-600 transition duration-300"
                 >
                   <FaTrashAlt />
                 </button>
@@ -120,12 +121,14 @@ const ManageAdmins = () => {
           ))}
         </tbody>
       </table>
+      </div>
+
 
       {/* Add User Modal */}
       {isAddModalOpen && (
-        <div className="fixed inset-0 bg-gray-600 bg-opacity-50 flex justify-center items-center z-50">
-          <div className="bg-white p-6 rounded-lg shadow-lg w-96">
-            <h3 className="text-xl mb-4">Add New User</h3>
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
+          <div className="bg-white p-8 rounded-lg shadow-lg w-96">
+          <h3 className="text-2xl font-semibold text-gray-800 mb-6">Add New Admin</h3>
             <form
               onSubmit={(e) => {
                 e.preventDefault();
@@ -141,35 +144,35 @@ const ManageAdmins = () => {
                 type="text"
                 name="name"
                 placeholder="Name"
-                className="w-full px-4 py-2 mb-4 border rounded-md"
+                className="w-full px-4 py-3 mb-4 border border-gray-300 rounded-md focus:ring-2 focus:ring-indigo-500"
                 required
               />
               <input
                 type="email"
                 name="email"
                 placeholder="Email"
-                className="w-full px-4 py-2 mb-4 border rounded-md"
+                className="w-full px-4 py-3 mb-4 border border-gray-300 rounded-md focus:ring-2 focus:ring-indigo-500"
                 required
               />
               <input
                 type="password"
                 name="password"
                 placeholder="Password"
-                className="w-full px-4 py-2 mb-4 border rounded-md"
+                className="w-full px-4 py-3 mb-4 border border-gray-300 rounded-md focus:ring-2 focus:ring-indigo-500"
                 required
               />
               {/* No select input for role, it will always be 'admin' */}
-              <div className="flex justify-between">
+              <div className="flex justify-between mt-4">
                 <button
                   type="submit"
-                  className="bg-green-600 text-white px-4 py-2 rounded-md"
+                  className="bg-green-600 text-white px-6 py-3 rounded-md hover:bg-green-700 transition duration-300"
                 >
                   Save
                 </button>
                 <button
                   type="button"
                   onClick={() => setIsAddModalOpen(false)}
-                  className="bg-red-600 text-white px-4 py-2 rounded-md"
+                  className="bg-gray-500 text-white px-6 py-3 rounded-md hover:bg-gray-600 transition duration-300"
                 >
                   Cancel
                 </button>
@@ -181,9 +184,9 @@ const ManageAdmins = () => {
 
       {/* Edit User Modal */}
       {isEditModalOpen && currentUser && (
-        <div className="fixed inset-0 bg-gray-600 bg-opacity-50 flex justify-center items-center z-50">
-          <div className="bg-white p-6 rounded-lg shadow-lg w-96">
-            <h3 className="text-xl mb-4">Edit User</h3>
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
+          <div className="bg-white p-8 rounded-lg shadow-lg w-96">
+          <h3 className="text-2xl font-semibold text-gray-800 mb-6">Edit Admin</h3>
             <form
               onSubmit={(e) => {
                 e.preventDefault();
@@ -202,7 +205,7 @@ const ManageAdmins = () => {
                 name="name"
                 defaultValue={currentUser.name}
                 placeholder="Name"
-                className="w-full px-4 py-2 mb-4 border rounded-md"
+                className="w-full px-4 py-3 mb-4 border border-gray-300 rounded-md focus:ring-2 focus:ring-indigo-500"
                 required
               />
               <input
@@ -210,26 +213,26 @@ const ManageAdmins = () => {
                 name="email"
                 defaultValue={currentUser.email}
                 placeholder="Email"
-                className="w-full px-4 py-2 mb-4 border rounded-md"
+                className="w-full px-4 py-3 mb-4 border border-gray-300 rounded-md focus:ring-2 focus:ring-indigo-500"
                 required
               />
               <input
                 type="password"
                 name="password"
                 placeholder="Password (Leave blank to keep current)"
-                className="w-full px-4 py-2 mb-4 border rounded-md"
+                className="w-full px-4 py-3 mb-4 border border-gray-300 rounded-md focus:ring-2 focus:ring-indigo-500"
               />
-              <div className="flex justify-between">
-                <button
+              <div className="flex justify-between mt-4">
+              <button
                   type="submit"
-                  className="bg-green-600 text-white px-4 py-2 rounded-md"
+                  className="bg-green-600 text-white px-6 py-3 rounded-md hover:bg-green-700 transition duration-300"
                 >
                   Save Changes
                 </button>
                 <button
                   type="button"
                   onClick={() => setIsEditModalOpen(false)}
-                  className="bg-red-600 text-white px-4 py-2 rounded-md"
+                  className="bg-gray-500 text-white px-6 py-3 rounded-md hover:bg-gray-600 transition duration-300"
                 >
                   Cancel
                 </button>
@@ -241,20 +244,20 @@ const ManageAdmins = () => {
 
       {/* Delete User Modal */}
       {isDeleteModalOpen && currentUser && (
-        <div className="fixed inset-0 bg-gray-600 bg-opacity-50 flex justify-center items-center z-50">
-          <div className="bg-white p-6 rounded-lg shadow-lg w-96">
-            <h3 className="text-xl mb-4">Delete User</h3>
-            <p>Are you sure you want to delete {currentUser.name}?</p>
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
+          <div className="bg-white p-8 rounded-lg shadow-lg w-96">
+          <h3 className="text-2xl font-semibold text-gray-800 mb-4">Delete Admin</h3>
+            <p className="text-gray-600">Are you sure you want to delete  {currentUser.name}?</p>
             <div className="flex justify-between mt-4">
               <button
                 onClick={() => handleDeleteUser(currentUser.id)}
-                className="bg-red-600 text-white px-4 py-2 rounded-md"
+                className="bg-red-600 text-white px-6 py-3 rounded-md hover:bg-red-700 transition duration-300"
               >
                 Yes, Delete
               </button>
               <button
                 onClick={() => setIsDeleteModalOpen(false)}
-                className="bg-gray-600 text-white px-4 py-2 rounded-md"
+                className="bg-gray-500 text-white px-6 py-3 rounded-md hover:bg-gray-600 transition duration-300"
               >
                 Cancel
               </button>

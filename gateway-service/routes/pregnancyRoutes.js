@@ -15,15 +15,7 @@ router.post('/', async (req, res) => {
   }
 });
 
-// Route to get pregnancy details by patient ID
-  // router.get('/:id', async (req, res) => {
-  //   try {
-  //     const response = await axios.get(`${pregnancyServiceUrl}/pregnancies/${req.params.id}`);
-  //     res.json(response.data);
-  //   } catch (error) {
-  //     res.status(500).json({ message: 'Error fetching pregnancy details' });
-  //   }
-  // });
+
 
 // Route to update pregnancy details by patient ID
 router.put('/:id', async (req, res) => {
@@ -50,7 +42,7 @@ router.get('/all', async (req, res) => {
     const response = await axios.get(`${pregnancyServiceUrl}/all`);
     res.json(response.data);
   } catch (error) {
-    res.status(500).json({ message: 'Error fetchiing pregnancy record' });
+    res.status(500).json({ message: 'Error fetchiing pregnancy record',error });
   }
 });
 

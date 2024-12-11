@@ -4,6 +4,10 @@ import * as Yup from "yup";
 import { loginUser } from "../../services/authService";
 import { useNavigate } from "react-router-dom";
 import { jwtDecode } from "jwt-decode"; // Ensure correct import
+import bgimg from '../../images/page-banner1.jpg';
+import TheNavbarsub from "../../components/TheNavbarsub";
+import TheNavbar from "../../components/TheNavbar";
+import TheFooter from "../../components/TheFooter";
 
 const Login = () => {
   const [error, setError] = useState(null);
@@ -54,23 +58,36 @@ const Login = () => {
   });
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gray-100">
-      <div className="bg-white p-6 rounded-lg shadow-lg w-full max-w-md">
-        <h1 className="text-2xl font-bold mb-6 text-center">Login</h1>
-        {error && <p className="text-red-500 text-center mb-4">{error}</p>}
-        <form onSubmit={formik.handleSubmit}>
-          <div className="mb-4">
-            <label
-              htmlFor="email"
-              className="block text-sm font-medium text-gray-700"
-            >
-              Email
-            </label>
+<div>
+<TheNavbarsub />
+<TheNavbar />
+      <div
+        style={{
+          background: `linear-gradient(0deg
+        , #11182773, #111827), url(${bgimg})`,
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+        }}
+        className="h-full py-10"
+      >
+        <h2 className="text-center text-3xl text-white font-semibold">
+          Sign In
+        </h2>
+      </div>      
+      <div style={{marginLeft:"25%"}}className="container  py-5 md:w-3/6">
+      {error && <p className="text-red-500 text-center mb-4">{error}</p>}
+      <form onSubmit={formik.handleSubmit} className="space-y-3">
+      <label
+            htmlFor="email"
+            className="block text-sm font-medium text-gray-700"
+          >
+            Email
+          </label>
             <input
               type="email"
               id="email"
               name="email"
-              className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+              className="mt-1 p-2 border block w-full shadow sm:text-sm border-gray-200 outline-none focus:border-blue-500  ring-gray-400 rounded-md"
               value={formik.values.email}
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
@@ -79,20 +96,18 @@ const Login = () => {
             {formik.touched.email && formik.errors.email && (
               <div className="text-red-500 text-sm mt-1">{formik.errors.email}</div>
             )}
-          </div>
 
-          <div className="mb-4">
-            <label
-              htmlFor="password"
-              className="block text-sm font-medium text-gray-700"
-            >
-              Password
-            </label>
+<label
+            htmlFor="password"
+            className="block text-sm font-medium text-gray-700"
+          >
+            Password
+          </label>
             <input
               type="password"
               id="password"
               name="password"
-              className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+              className="mt-1 p-2 border block w-full shadow sm:text-sm border-gray-200 outline-none focus:border-blue-500  ring-gray-400 rounded-md"
               value={formik.values.password}
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
@@ -101,17 +116,39 @@ const Login = () => {
             {formik.touched.password && formik.errors.password && (
               <div className="text-red-500 text-sm mt-1">{formik.errors.password}</div>
             )}
-          </div>
 
           <button
             type="submit"
-            className="w-full py-2 px-4 bg-indigo-600 text-white rounded-md shadow hover:bg-indigo-700 transition duration-150"
-            disabled={loading}
+            className="bg-blue-800 hover:bg-blue-900 transition delay-75 text-gray-100 py-2 px-2.5 w-full my-1.5 rounded-md shadow-md"            disabled={loading}
           >
             {loading ? "Logging in..." : "Login"}
           </button>
         </form>
+        <div className="my-4">
+          <h3 className="text-center m-0">
+            <span>-----</span> Or sign in with <span>-----</span>
+          </h3>
+          <div className="bg-white max-w-lg py-2.5 mx-auto rounded-md shadow-md">
+            <div className="flex items-center justify-center space-x-3">
+              <button
+                onClick={()=>console.log("sign in with google")}
+                className="cursor-pointer rounded-full shadow-xl bg-gray-200 p-1"
+              >
+                <img src="/img/google.png" alt="google" />
+              </button>
+              <div className="cursor-pointer rounded-full shadow-xl bg-gray-200 p-1">
+                <img src="/img/github.png" alt="github" />
+              </div>
+              <div className="cursor-pointer rounded-full shadow-xl bg-gray-200 p-1">
+                <img src="/img/facebook.png" alt="facebook" />
+              </div>
+            </div>
+          </div>
+
+          
+        </div>
       </div>
+      <TheFooter />
     </div>
   );
 };

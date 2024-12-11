@@ -6,7 +6,7 @@ exports.createPregnancy = async (req, res) => {
   try {
     const { name, email, password, monthOfPregnancy, city, hospitalName, doctorName } = req.body;
 
-    const userResponse = await axios.post("http://localhost:3001/api/users/register", {
+    const userResponse = await axios.post("http://localhost:3000/users/register", {
       name,
       email,
       password,
@@ -90,9 +90,7 @@ exports.getAllPregnancies = async (req, res) => {
   try {
     const pregnancies = await Pregnancy.findAll(); // Retrieve all pregnancy records
 
-    if (!pregnancies || pregnancies.length === 0) {
-      return res.status(404).json({ message: 'No pregnancies found' });
-    }
+    
 
     res.json(pregnancies); // Return the list of pregnancies
   } catch (error) {

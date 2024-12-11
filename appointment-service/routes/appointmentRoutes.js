@@ -16,4 +16,10 @@ router.put('/appointments/:id', appointmentController.updateAppointment);
 // Delete an appointment
 router.delete('/appointments/:id', appointmentController.deleteAppointment);
 
+router.patch(
+    '/appointments/:id/notes-and-documents',
+    appointmentController.uploadDocuments,
+    appointmentController.updateNotesAndDocuments
+  );
+
 module.exports = router;

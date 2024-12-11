@@ -6,6 +6,7 @@ const bodyParser = require('body-parser');
 const sequelize = require('./config/database');
 const appointmentRoutes = require('./routes/appointmentRoutes');
 const authMiddleware = require('./middlewares/auth');
+const path = require('path');
 
 // Initialize dotenv to use environment variables
 dotenv.config();
@@ -18,6 +19,7 @@ app.use(bodyParser.json());
 
 // CORS middleware for cross-origin requests
 app.use(cors());
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 // API routes
 app.use('/api', appointmentRoutes);

@@ -61,11 +61,16 @@ Content-Type: application/json
 Authorization: Bearer <your-jwt-token>
 
 {
-  "patientId": "123",
-  "doctorId": "456",
-  "appointmentDate": "2024-12-15T10:00:00",
-  "status": "scheduled"
+  "doctorName": "Dr. John Doe",
+  "doctorId": 1,
+  "patientId": 123,
+  "patientName": "Ilyass Mohamed",
+  "status": "Cancelled",
+  "appointmentDate": "2024-12-10",
+  "doctorNotes": "Patient cancelled appointment.",
+  "documents": []
 }
+
 
 ###
 
@@ -94,3 +99,15 @@ DELETE http://localhost:3000/appointments/2 HTTP/1.1
 Authorization: Bearer<your-jwt-token>
 
 ###
+
+POST http://localhost:3005/api/notifications
+Content-Type: application/json
+
+{
+    "type": "ACCOUNT_CREATION",
+    "payload": {
+        "email": "ilyassm174@gmail.com",
+        "name": "John Doe",
+        "password": "securepassword123"
+    }
+}
